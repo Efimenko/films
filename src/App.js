@@ -39,8 +39,10 @@ const App = () => {
 
       <Pagination
         currentPage={currentPage}
-        totalPages={totalPages}
+        // totalPages={totalPages}
+        totalPages={30}
         onChangePage={changePage}
+        maxPages={7}
       />
     </div>
   );
