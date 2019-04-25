@@ -12,7 +12,7 @@ const App = () => {
   const [totalPages, setTotalPages] = useState(null);
 
   useEffect(() => {
-    fetch(`${API}/movie/popular?api_key=${API_KEY}`)
+    fetch(`${API}/movie/popular?api_key=${API_KEY}&page=${currentPage}`)
       .then(response => response.json())
       .then(data => {
         console.log({ data });
@@ -22,12 +22,10 @@ const App = () => {
         setFilms(results);
         setTotalPages(total_pages);
       });
-  }, []);
+  }, [currentPage]);
 
-  const changePage = pageNumber => e => {
-    e.preventDefault();
-
-    setCurrentPage(pageNumber)
+  const changePage = pageNumber => {
+    setCurrentPage(pageNumber);
   };
 
   return (

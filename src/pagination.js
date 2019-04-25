@@ -1,51 +1,61 @@
-import React, {useState, useEffect} from 'react'
-const Pagination = ({currentPage, totalPages, maxPages, onChangePage}) => {
-  const [pages, setPages] = useState(null)
+import React from "react";
+import { range } from "./utilities/index";
 
-  useEffect(() => {
-    // setPages(renderPages())
-    const {startPage, endPage} = generateData()
-    setPages(generatePages(startPage, endPage))
-  }, [currentPage, totalPages, maxPages])
+const useData = ({ currentPage, totalPages, maxPages }) => {
+  // depends on maxPages currentPage totalPages
+  // calc maxPagesBeforeCurrent maxPagesAfterCurrent startPage endPage
+  // returns startPage endPage
+  const maxPagesBeforeCurrent = Math.floor(maxPages / 2);
+  const maxPagesAfterCurrent = Math.ceil(maxPages / 2) - 1;
+  let startPage;
+  let endPage;
 
-  const generateData = () => {
-    // depends on maxPages currentPage totalPages
-    // calc maxPagesBeforeCurrent maxPagesAfterCurrent startPage endPage
-    // returns startPage endPage
-    const maxPagesBeforeCurrent = Math.floor(maxPages / 2)
-    const maxPagesAfterCurrent = Math.ceil(maxPages / 2) - 1
-    let startPage
-    let endPage
-
-    console.log({currentPage, totalPages, maxPages, maxPagesAfterCurrent, maxPagesBeforeCurrent})
-    if (totalPages < maxPages) {
-      startPage = 1
-      endPage = totalPages
-    } else if (currentPage - maxPagesBeforeCurrent > 1 && currentPage + maxPagesAfterCurrent < totalPages) {
-      startPage = currentPage - maxPagesBeforeCurrent
-      endPage = currentPage + maxPagesAfterCurrent
-    } else if (currentPage - maxPagesBeforeCurrent <= 1) {
-      startPage = 1
-      endPage = maxPages
-    } else if (currentPage + maxPagesAfterCurrent >= totalPages) {
-      startPage = totalPages - maxPages + 1
-      endPage = totalPages
-    }
-
-    return {startPage, endPage}
+  if (totalPages < maxPages) {
+    startPage = 1;
+    endPage = totalPages;
+  } else if (
+    currentPage - maxPagesBeforeCurrent > 1 &&
+    currentPage + maxPagesAfterCurrent < totalPages
+  ) {
+    startPage = currentPage - maxPagesBeforeCurrent;
+    endPage = currentPage + maxPagesAfterCurrent;
+  } else if (currentPage - maxPagesBeforeCurrent <= 1) {
+    startPage = 1;
+    endPage = maxPages;
+  } else if (currentPage + maxPagesAfterCurrent >= totalPages) {
+    startPage = totalPages - maxPages + 1;
+    endPage = totalPages;
   }
 
-  const generatePages = (startPage, endPage) => {
-    const pages = []
-    for (let i = startPage; i <= endPage; i++) {
-      pages.push(<li className={i === currentPage ? 'current' : ''}><a href={`#page${i}`} onClick={onChangePage(i)}>{i}</a></li>)
-    }
+  return { startPage, endPage };
+};
 
-    return pages
-  }
+const Pagination = ({ currentPage, totalPages, maxPages, onChangePage }) => {
+  const { startPage, endPage } = useData({ currentPage, totalPages, maxPages });
+
+  const pages = range(startPage, endPage);
+
   return (
-    pages && (<ul>{pages}</ul>)
-  )
-}
+    pages.length && (
+      <ul>
+        {pages.map(page => {
+          return (
+            <li className={page === currentPage ? "current" : ""}>
+              <a
+                href={`#page${page}`}
+                onClick={e => {
+                  e.preventDefault();
+                  onChangePage(page);
+                }}
+              >
+                {page}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    )
+  );
+};
 
-export default Pagination
+export default Pagination;
