@@ -1,7 +1,7 @@
 import React from "react";
-import { range } from "./utilities/index";
+import { range } from "./utilities";
 
-const useData = ({ currentPage, totalPages, maxPages }) => {
+const useData = ({ currentPage, totalPages, maxPages = 7 }) => {
   // depends on maxPages currentPage totalPages
   // calc maxPagesBeforeCurrent maxPagesAfterCurrent startPage endPage
   // returns startPage endPage
