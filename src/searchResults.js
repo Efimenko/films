@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Pagination from "./pagination";
+import { parseQuery } from "./utilities";
 import { API_LINK, API_KEY } from "./constants";
 
-const SearchResults = ({ match }) => {
+const SearchResults = ({ location }) => {
   const [films, setFilms] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
 
   useEffect(() => {
+    const { query } = parseQuery(location.search);
+
     fetch(
-      `${API_LINK}/search/movie?api_key=${API_KEY}&page=${currentPage}&query=${
-        match.params.query
-      }`
+      `${API_LINK}/search/movie?api_key=${API_KEY}&page=${currentPage}&query=${query}`
     )
       .then(response => response.json())
       .then(data => {
@@ -26,7 +27,6 @@ const SearchResults = ({ match }) => {
   const changePage = pageNumber => {
     setCurrentPage(pageNumber);
   };
-  console.log("render");
   return (
     <React.Fragment>
       {films && (

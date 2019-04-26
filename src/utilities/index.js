@@ -5,3 +5,15 @@ export const range = (start, end) => {
   }
   return arr;
 };
+
+export const parseQuery = query => {
+  return query
+    ? query
+        .slice(1)
+        .split("&")
+        .map(pairString => pairString.split("="))
+        .reduce((acc, [key, value]) => {
+          return { ...acc, [key]: value };
+        }, {})
+    : {};
+};

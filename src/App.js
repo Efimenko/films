@@ -19,7 +19,7 @@ const App = () => {
       <div className="App">
         <Search getQuery={getQuery} />
         <Route exact path="/" component={PopularFilms} />
-        <Route path="/search?query=:query" component={SearchResults} />
+        <Route path="/search" component={SearchResults} />
         {/* <Route path="/search" component={SearchResults} /> */}
       </div>
     </Router>
