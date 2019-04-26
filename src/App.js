@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 import PopularFilms from "./popularFilms";
 import SearchResults from "./searchResults";
@@ -14,11 +15,14 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <Search getQuery={getQuery} />
-      {view === "popular" && <PopularFilms />}
-      {view === "search" && <SearchResults query={query} />}
-    </div>
+    <Router>
+      <div className="App">
+        <Search getQuery={getQuery} />
+        <Route exact path="/" component={PopularFilms} />
+        <Route path="/search?query=:query" component={SearchResults} />
+        {/* <Route path="/search" component={SearchResults} /> */}
+      </div>
+    </Router>
   );
 };
 
