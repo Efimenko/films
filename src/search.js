@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+import { API_LINK, API_KEY } from "./constants";
 
-const Search = () => {
+const Search = ({ getQuery }) => {
   const [value, setValue] = useState("");
 
+  const submitForm = event => {
+    event.preventDefault();
+    getQuery(value);
+  };
+
   return (
-    <form>
+    <form onSubmit={submitForm}>
       <input
         placeholder="Type something..."
         value={value}
