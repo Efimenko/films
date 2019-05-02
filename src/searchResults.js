@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Pagination from "./pagination";
-import { parseQuery } from "./utilities";
+import { parseQuery, generateQuery } from "./utilities";
 import { API_LINK, API_KEY } from "./constants";
 
-const SearchResults = ({ location }) => {
+const SearchResults = ({ location, history }) => {
   const [films, setFilms] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(
+    Number(parseQuery(location.search).page) || 1
+  );
   const [totalPages, setTotalPages] = useState(null);
 
   useEffect(() => {
-    const { query } = parseQuery(location.search);
+    const { query, page } = parseQuery(location.search);
 
     fetch(
-      `${API_LINK}/search/movie?api_key=${API_KEY}&page=${currentPage}&query=${query}`
+      `${API_LINK}/search/movie?api_key=${API_KEY}&page=${page}&query=${query}`
     )
       .then(response => response.json())
       .then(data => {
@@ -22,6 +24,17 @@ const SearchResults = ({ location }) => {
         setFilms(results);
         setTotalPages(total_pages);
       });
+  }, [currentPage, location]);
+
+  useEffect(() => {
+    const currentSearch = parseQuery(location.search);
+    const updatedSearchString = generateQuery({
+      ...currentSearch,
+      page: currentPage
+    });
+    history.push({
+      search: updatedSearchString
+    });
   }, [currentPage]);
 
   const changePage = pageNumber => {

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { API_LINK, API_KEY } from "./constants";
+import { withRouter } from "react-router-dom";
 
-const Search = ({ getQuery }) => {
+const Search = ({ history }) => {
   const [value, setValue] = useState("");
 
   const submitForm = event => {
     event.preventDefault();
-    getQuery(value);
+    history.push(`/search/?query=${value}`);
   };
 
   return (
@@ -21,4 +21,4 @@ const Search = ({ getQuery }) => {
   );
 };
 
-export default Search;
+export default withRouter(Search);

@@ -17,3 +17,17 @@ export const parseQuery = query => {
         }, {})
     : {};
 };
+
+export const generateQuery = data => {
+  return data
+    ? Object.keys(data).reduce((acc, key, index) => {
+        if (index === 0) {
+          acc += `?${key}=${data[key]}`;
+        } else {
+          acc += `&${key}=${data[key]}`;
+        }
+
+        return acc;
+      }, "")
+    : "";
+};
