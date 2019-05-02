@@ -6,7 +6,8 @@ const Search = ({ history }) => {
 
   const submitForm = event => {
     event.preventDefault();
-    history.push(`/search/?query=${value}`);
+    console.log("submit form");
+    history.push(`/search/?query=${value}&page=1`);
   };
 
   return (

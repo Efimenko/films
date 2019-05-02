@@ -7,7 +7,8 @@ import usePagination from "./hooks/useSearch";
 
 const SearchResults = ({ location, history }) => {
   const [currentPage, setCurrentPage] = usePagination({ location, history });
-
+  console.log({ currentPage });
+  console.log("render search results", { location });
   const { query } = parseQuery(location.search);
   const urlForSearch = `${API_LINK}/search/movie?api_key=${API_KEY}&page=${currentPage}&query=${query}`;
 
