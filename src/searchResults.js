@@ -1,41 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Pagination from "./pagination";
-import { parseQuery, generateQuery } from "./utilities";
+import { parseQuery } from "./utilities";
 import { API_LINK, API_KEY } from "./constants";
+import useFetch from "./hooks/useFetch";
+import usePagination from "./hooks/useSearch";
 
 const SearchResults = ({ location, history }) => {
-  const [films, setFilms] = useState(null);
-  const [currentPage, setCurrentPage] = useState(
-    Number(parseQuery(location.search).page) || 1
-  );
-  const [totalPages, setTotalPages] = useState(null);
+  const [currentPage, setCurrentPage] = usePagination({ location, history });
 
-  useEffect(() => {
-    const { query, page } = parseQuery(location.search);
+  const { query } = parseQuery(location.search);
+  const urlForSearch = `${API_LINK}/search/movie?api_key=${API_KEY}&page=${currentPage}&query=${query}`;
 
-    fetch(
-      `${API_LINK}/search/movie?api_key=${API_KEY}&page=${page}&query=${query}`
-    )
-      .then(response => response.json())
-      .then(data => {
-        return data;
-      })
-      .then(({ results, total_pages }) => {
-        setFilms(results);
-        setTotalPages(total_pages);
-      });
-  }, [currentPage, location]);
-
-  useEffect(() => {
-    const currentSearch = parseQuery(location.search);
-    const updatedSearchString = generateQuery({
-      ...currentSearch,
-      page: currentPage
-    });
-    history.push({
-      search: updatedSearchString
-    });
-  }, [currentPage]);
+  const [films, totalPages] = useFetch(urlForSearch, currentPage, location);
 
   const changePage = pageNumber => {
     setCurrentPage(pageNumber);

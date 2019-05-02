@@ -1,23 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Pagination from "./pagination";
 import { API_LINK, API_KEY } from "./constants";
+import useFetch from "./hooks/useFetch";
+import usePagination from "./hooks/useSearch";
 
-const PopularFilms = () => {
-  const [films, setFilms] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(null);
+const PopularFilms = ({ location, history }) => {
+  const [currentPage, setCurrentPage] = usePagination({ location, history });
 
-  useEffect(() => {
-    fetch(`${API_LINK}/movie/popular?api_key=${API_KEY}&page=${currentPage}`)
-      .then(response => response.json())
-      .then(data => {
-        return data;
-      })
-      .then(({ results, total_pages }) => {
-        setFilms(results);
-        setTotalPages(total_pages);
-      });
-  }, [currentPage]);
+  const urlForPopular = `${API_LINK}/movie/popular?api_key=${API_KEY}&page=${currentPage}`;
+  const [films, totalPages] = useFetch(urlForPopular, currentPage);
 
   const changePage = pageNumber => {
     setCurrentPage(pageNumber);
