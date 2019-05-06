@@ -2,17 +2,25 @@ import React from "react";
 import Pagination from "./pagination";
 import { API_LINK, API_KEY } from "./constants";
 import useFetch from "./hooks/useFetch";
-import usePagination from "./hooks/useSearch";
+import { parseQuery, generateQuery } from "./utilities";
 
 const PopularFilms = ({ location, history }) => {
-  const [currentPage, setCurrentPage] = usePagination({ location, history });
+  const currentSearch = parseQuery(location.search);
+  const page = Number(currentSearch.page) || 1;
 
-  const urlForPopular = `${API_LINK}/movie/popular?api_key=${API_KEY}&page=${currentPage}`;
-  const [films, totalPages] = useFetch(urlForPopular, currentPage);
+  const updatePage = pageNumber => {
+    const updatedSearchString = generateQuery({
+      ...currentSearch,
+      page: pageNumber
+    });
 
-  const changePage = pageNumber => {
-    setCurrentPage(pageNumber);
+    history.push({
+      search: updatedSearchString
+    });
   };
+
+  const urlForPopular = `${API_LINK}/movie/popular?api_key=${API_KEY}&page=${page}`;
+  const [films, totalPages] = useFetch(urlForPopular, page);
 
   return (
     <React.Fragment>
@@ -25,9 +33,9 @@ const PopularFilms = ({ location, history }) => {
       )}
       {totalPages && (
         <Pagination
-          currentPage={currentPage}
+          currentPage={page}
           totalPages={totalPages}
-          onChangePage={changePage}
+          onChangePage={updatePage}
         />
       )}
     </React.Fragment>

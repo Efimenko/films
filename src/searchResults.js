@@ -1,22 +1,28 @@
 import React from "react";
 import Pagination from "./pagination";
-import { parseQuery } from "./utilities";
+import { parseQuery, generateQuery } from "./utilities";
 import { API_LINK, API_KEY } from "./constants";
 import useFetch from "./hooks/useFetch";
-import usePagination from "./hooks/useSearch";
 
 const SearchResults = ({ location, history }) => {
-  const [currentPage, setCurrentPage] = usePagination({ location, history });
-  console.log({ currentPage });
-  console.log("render search results", { location });
-  const { query } = parseQuery(location.search);
-  const urlForSearch = `${API_LINK}/search/movie?api_key=${API_KEY}&page=${currentPage}&query=${query}`;
+  const currentSearch = parseQuery(location.search);
+  const page = Number(currentSearch.page);
+  const { query } = currentSearch;
 
-  const [films, totalPages] = useFetch(urlForSearch, currentPage, location);
+  const updatePage = pageNumber => {
+    const updatedSearchString = generateQuery({
+      ...currentSearch,
+      page: pageNumber
+    });
 
-  const changePage = pageNumber => {
-    setCurrentPage(pageNumber);
+    history.push({
+      search: updatedSearchString
+    });
   };
+
+  const urlForSearch = `${API_LINK}/search/movie?api_key=${API_KEY}&page=${page}&query=${query}`;
+  const [films, totalPages] = useFetch(urlForSearch, page, location);
+
   return (
     <React.Fragment>
       {films && (
@@ -28,9 +34,9 @@ const SearchResults = ({ location, history }) => {
       )}
       {totalPages && (
         <Pagination
-          currentPage={currentPage}
+          currentPage={page}
           totalPages={totalPages}
-          onChangePage={changePage}
+          onChangePage={updatePage}
         />
       )}
     </React.Fragment>
