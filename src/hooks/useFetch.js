@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
 
-const useFetch = (link, currentPage, location) => {
-  const [films, setFilms] = useState(null);
-  const [totalPages, setTotalPages] = useState(null);
-
+const useFetch = (link, ...deps) => {
+  console.log({deps})
+  const [data, setData] = useState(null);
   useEffect(() => {
     fetch(link)
       .then(response => response.json())
-      .then(({ results, total_pages }) => {
-        setFilms(results);
-        setTotalPages(total_pages);
+      .then(data => {
+        console.log({data});
+        setData(data)
       });
-  }, [currentPage, location]);
+  }, [...deps]);
 
-  return [films, totalPages];
+  return data;
 };
 
 export default useFetch;

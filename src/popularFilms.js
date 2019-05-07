@@ -2,6 +2,7 @@ import React from "react";
 import Pagination from "./pagination";
 import { API_LINK, API_KEY } from "./constants";
 import useFetch from "./hooks/useFetch";
+import List from "./list";
 import { parseQuery, generateQuery } from "./utilities";
 
 const PopularFilms = ({ location, history }) => {
@@ -20,25 +21,21 @@ const PopularFilms = ({ location, history }) => {
   };
 
   const urlForPopular = `${API_LINK}/movie/popular?api_key=${API_KEY}&page=${page}`;
-  const [films, totalPages] = useFetch(urlForPopular, page);
+  const data = useFetch(urlForPopular, page);
 
   return (
-    <React.Fragment>
-      {films && (
-        <ul className="films-list">
-          {films.map(({ title }) => {
-            return <li className="films-list__item">{title}</li>;
-          })}
-        </ul>
-      )}
-      {totalPages && (
-        <Pagination
-          currentPage={page}
-          totalPages={totalPages}
-          onChangePage={updatePage}
-        />
-      )}
-    </React.Fragment>
+    data && (
+      <React.Fragment>
+        <List data={data.results} />
+        {data.total_pages && (
+          <Pagination
+            currentPage={page}
+            totalPages={data.total_pages}
+            onChangePage={updatePage}
+          />
+        )}
+      </React.Fragment>
+    )
   );
 };
 
