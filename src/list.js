@@ -9,6 +9,12 @@ const List = ({ data }) => {
     setFavorites({...favorites, ...filmObject});
   };
 
+  const removeFromFavorite = (id) => () => {
+    const clonedFavorites = Object.assign({}, favorites)
+    delete clonedFavorites[id]
+    setFavorites(clonedFavorites)
+  }
+
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
@@ -20,9 +26,13 @@ const List = ({ data }) => {
           return (
             <li key={id} className="films-list__item">
               <Link to={`/film/${id}`}>{title}</Link>
-              {!Object.keys(favorites).includes(String(id)) && (
+              {!Object.keys(favorites).includes(String(id)) ? (
                 <button type="button" onClick={addToFavorite({[id]: {title}})}>
                   Add to favorites
+                </button>
+              ) : (
+                <button type="button" onClick={removeFromFavorite(id)}>
+                  Remove from favorites
                 </button>
               )}
             </li>

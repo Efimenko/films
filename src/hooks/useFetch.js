@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 
-const useFetch = (link, ...deps) => {
-  console.log({deps})
+const useFetch = (link) => {
   const [data, setData] = useState(null);
   useEffect(() => {
+    let canceled
     fetch(link)
       .then(response => response.json())
       .then(data => {
-        console.log({data});
-        setData(data)
+        if (!canceled) {
+          setData(data)
+        }
       });
-  }, [...deps]);
-
+    return () => {
+      canceled = true
+    }
+  }, [link]);
   return data;
 };
 
