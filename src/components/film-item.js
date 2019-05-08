@@ -10,7 +10,7 @@ const FilmItem = ({
   removeFromFavorite,
   isFavorite
 }) => (
-  <article class="film-item">
+  <article className="film-item">
     <div className="film-item__image-wrapper">
       <img
         src={`${IMAGE_PATH}/${posterPath}`}
@@ -34,7 +34,7 @@ const FilmItem = ({
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 53.9 53.9"
-            class="favorite-icon"
+            className="favorite-icon"
           >
             <path d="M27 1.3l8.3 16.9 18.6 2.7L40.4 34l3.2 18.5-16.7-8.7-16.6 8.7L13.5 34 0 21l18.6-2.7z" />
           </svg>
@@ -49,7 +49,7 @@ const FilmItem = ({
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 53.9 53.9"
-            class="favorite-icon favorite-icon--active"
+            className="favorite-icon favorite-icon--active"
           >
             <path d="M27 1.3l8.3 16.9 18.6 2.7L40.4 34l3.2 18.5-16.7-8.7-16.6 8.7L13.5 34 0 21l18.6-2.7z" />
           </svg>

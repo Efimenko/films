@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
 
 const Search = ({ history }) => {
   const [value, setValue] = useState("");
@@ -11,15 +10,18 @@ const Search = ({ history }) => {
   };
 
   return (
-    <form onSubmit={submitForm}>
+    <form className="search-form" onSubmit={submitForm}>
       <input
+        className="search-form__input"
         placeholder="Type something..."
         value={value}
         onChange={e => setValue(e.target.value)}
       />
-      <button type="submit">Search</button>
+      <button className="search-form__button" type="submit">
+        Search
+      </button>
     </form>
   );
 };
 
-export default withRouter(Search);
+export default Search;
