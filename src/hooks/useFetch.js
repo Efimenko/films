@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useFetch = (link) => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({})
   useEffect(() => {
     let canceled
     fetch(link)
@@ -10,7 +10,9 @@ const useFetch = (link) => {
         if (!canceled) {
           setData(data)
         }
-      });
+      })
+      .catch(err => console.error(err));
+
     return () => {
       canceled = true
     }

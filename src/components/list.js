@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import FilmItem from "./film-item";
 
 const List = ({ data }) => {
+  console.log({data})
   const initialFavotites = JSON.parse(localStorage.getItem("favorites")) || {};
   const [favorites, setFavorites] = useState(initialFavotites);
 
@@ -20,7 +21,7 @@ const List = ({ data }) => {
   }, [favorites]);
 
   return (
-    data && (
+    data.length && (
       <ul className="films-list">
         {data.map(({ title, id, poster_path }) => {
           const isFavorite = Object.keys(favorites).includes(String(id))

@@ -42,6 +42,7 @@ const Pagination = ({ currentPage, totalPages, maxPages, onChangePage }) => {
         {pages.map(page => {
           return (
             <li
+              key={page}
               className={classNames("pagination__item", {
                 "pagination__item--current": page === currentPage
               })}

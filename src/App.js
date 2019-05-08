@@ -5,6 +5,7 @@ import SearchResults from "./components/searchResults";
 import Header from "./components/header";
 import SinglePage from "./components/single-page";
 import Favorites from './components/favorites'
+import FilmsByGenre from './components/films-by-genre'
 import "./App.css";
 
 const App = () => {
@@ -15,7 +16,8 @@ const App = () => {
         <Route exact path="/" component={PopularFilms} />
         <Route path="/search" component={SearchResults} />
         <Route path="/favorites" component={Favorites} />
-        <Route path="/film/:id" component={SinglePage} />
+        <Route path="/film/:filmId" component={SinglePage} />
+        <Route path="/genre/:genreId" component={FilmsByGenre} />
       </div>
     </Router>
   );
