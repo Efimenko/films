@@ -24,7 +24,7 @@ const PopularFilms = ({ location, history }) => {
   const data = useFetch(urlForPopular, page);
 
   return (
-    data && (
+    Boolean(Object.keys(data).length) && (
       <React.Fragment>
         <List data={data.results} />
         {data.total_pages && (

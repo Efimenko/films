@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import FilmItem from "./film-item";
 
 const List = ({ data }) => {
-  console.log({data})
   const initialFavotites = JSON.parse(localStorage.getItem("favorites")) || {};
   const [favorites, setFavorites] = useState(initialFavotites);
 
@@ -20,27 +19,25 @@ const List = ({ data }) => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
-  return (
-    data.length && (
-      <ul className="films-list">
-        {data.map(({ title, id, poster_path }) => {
-          const isFavorite = Object.keys(favorites).includes(String(id))
-          return (
-            <li key={id} className="films-list__item">
-              <FilmItem
-                title={title}
-                id={id}
-                posterPath={poster_path}
-                addToFavorite={addToFavorite}
-                removeFromFavorite={removeFromFavorite}
-                isFavorite={isFavorite}
-              />
-            </li>
-          );
-        })}
-      </ul>
-    )
-  );
+  return (data && data.length) ? (
+    <ul className="films-list">
+      {data.map(({ title, id, poster_path }) => {
+        const isFavorite = Object.keys(favorites).includes(String(id));
+        return (
+          <li key={id} className="films-list__item">
+            <FilmItem
+              title={title}
+              id={id}
+              posterPath={poster_path}
+              addToFavorite={addToFavorite}
+              removeFromFavorite={removeFromFavorite}
+              isFavorite={isFavorite}
+            />
+          </li>
+        );
+      })}
+    </ul>
+  ) : null;
 };
 
 export default List;

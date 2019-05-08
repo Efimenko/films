@@ -34,7 +34,7 @@ const SinglePage = ({match}) => {
       )}
       
       <p>{overview}</p>
-      { similarFilmsData && (<section>
+      { Boolean(Object.keys(similarFilmsData).length) && (<section>
         <h3>Similar</h3>
         <List data={similarFilmsData.results}/>
       </section>)}

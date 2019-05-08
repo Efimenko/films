@@ -5,13 +5,21 @@ const useFetch = (link) => {
   useEffect(() => {
     let canceled
     fetch(link)
-      .then(response => response.json())
+      .then(response => {
+        if (response.status !== 200) {
+          throw new Error({code: response.status, text: response.statusText})
+        } else {
+          return response.json()
+        }
+      })
       .then(data => {
         if (!canceled) {
           setData(data)
         }
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        setData({error: true, ...err})
+      });
 
     return () => {
       canceled = true

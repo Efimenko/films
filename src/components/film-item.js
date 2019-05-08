@@ -28,7 +28,7 @@ const FilmItem = ({
         <button
           type="button"
           className="film-item__favorite"
-          onClick={addToFavorite({ [id]: { title } })}
+          onClick={addToFavorite({ [id]: { title, poster_path: posterPath } })}
           title="Add to favorite"
         >
           <svg

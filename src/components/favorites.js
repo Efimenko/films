@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import List from "./list";
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState({});
 
   useEffect(() => {
-    const favoritesFromStorage = JSON.parse(localStorage.getItem("favorites"));
+    const favoritesFromStorage = JSON.parse(localStorage.getItem("favorites")) || {};
     setFavorites(favoritesFromStorage);
   }, []);
+
+  const formatedFavorites = Object.keys(favorites).reduce((acc, id) => {
+    const {poster_path, title} = favorites[id]
+    return [...acc, {id, poster_path, title}]
+  }, [])
 
   return (
     <React.Fragment>
       <h2>Favorites</h2>
-      {Object.keys(favorites).length !== 0 && (
-        <ul>
-          {Object.keys(favorites).map(filmId => {
-            return (
-              <li>
-                <Link to={`/film/${filmId}`}>{favorites[filmId].title}</Link>
-              </li>
-            );
-          })}
-        </ul>
+      {Object.keys(favorites).length === 0 ? (
+        "List of favorites films is empty"
+      ) : (
+        <List data={formatedFavorites} />
       )}
     </React.Fragment>
   );
