@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import PopularFilms from "./components/popularFilms";
+import SearchResults from "./components/searchResults";
+import Header from "./components/header";
+import SinglePage from "./components/single-page";
+import Favorites from './components/favorites'
 import "./App.css";
-import PopularFilms from "./popularFilms";
-import SearchResults from "./searchResults";
-import Header from "./header";
-import SinglePage from "./single-page";
-import Favorites from './favorites'
 
 const App = () => {
   return (

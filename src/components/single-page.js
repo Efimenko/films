@@ -1,7 +1,7 @@
 import React from 'react'
-import useFetch from './hooks/useFetch'
+import useFetch from '../hooks/useFetch'
 import List from './list'
-import {API_KEY, API_LINK, IMAGE_PATH} from './constants'
+import {API_KEY, API_LINK, IMAGE_PATH} from '../constants'
 
 const SinglePage = ({match}) => {
   const filmId = match.params.id

@@ -1,9 +1,9 @@
 import React from "react";
 import Pagination from "./pagination";
-import { API_LINK, API_KEY } from "./constants";
-import useFetch from "./hooks/useFetch";
+import { API_LINK, API_KEY } from "../constants";
+import useFetch from "../hooks/useFetch";
 import List from "./list";
-import { parseQuery, generateQuery } from "./utilities";
+import { parseQuery, generateQuery } from "../utilities";
 
 const PopularFilms = ({ location, history }) => {
   const currentSearch = parseQuery(location.search);

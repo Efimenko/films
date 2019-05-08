@@ -1,9 +1,9 @@
 import React from "react";
 import Pagination from "./pagination";
-import { parseQuery, generateQuery } from "./utilities";
-import { API_LINK, API_KEY } from "./constants";
+import { parseQuery, generateQuery } from "../utilities";
+import { API_LINK, API_KEY } from "../constants";
 import List from './list'
-import useFetch from "./hooks/useFetch";
+import useFetch from "../hooks/useFetch";
 
 const SearchResults = ({ location, history }) => {
   const currentSearch = parseQuery(location.search);
