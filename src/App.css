@@ -1,4 +1,134 @@
+:root {
+	--gutter: 16px;
+	--film-card-vertical-offset: 12px;
+	--film-card-horizontal-offset: 8px;
+	--transition-duration: 0.2s;
+}
+
 .current a {
 	color: #000;
 	text-decoration: none;
+}
+
+.films-list {
+	padding-left: 0;
+	list-style: none;
+	padding-left: var(--gutter);
+	padding-right: var(--gutter);
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.films-list__item {
+	flex: 1;
+	min-width: 200px;
+	padding: var(--gutter);
+}
+
+.film-item {
+	position: relative;
+	padding-top: 150%;
+	overflow: hidden;
+}
+
+.film-item__image-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.film-item__image-wrapper::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	opacity: 0;
+	transition: opacity var(--transition-duration) ease-in; 
+}
+
+.film-item:hover .film-item__image-wrapper::before,
+.film-item:focus-within .film-item__image-wrapper::before {
+	opacity: 0.5;
+}
+
+.film-item__image {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.film-item__inner {
+	position: absolute;
+	top: var(--film-card-vertical-offset);
+	right: var(--film-card-horizontal-offset);
+	bottom: var(--film-card-vertical-offset);
+	left: var(--film-card-horizontal-offset);
+	display: flex;
+	flex-direction: column-reverse;
+	justify-content: space-between;
+}
+
+.film-item__title {
+	font-size: 24px;
+	color: #fff;
+	margin: 0;
+	opacity: 0;
+	transition: opacity var(--transition-duration) ease-in;
+}
+
+.film-item:hover .film-item__title,
+.film-item:focus-within .film-item__title{
+	opacity: 1;
+}
+
+.film-item__link {
+	color: inherit;
+	text-decoration: none;
+}
+
+.film-item__link::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.film-item__favorite {
+	padding: 5px;
+	background: none;
+	border: 0;
+	cursor: pointer;
+	align-self: flex-start;
+	will-change: transform;
+	transition: transform var(--transition-duration) ease-in;
+	transform: translateY(calc(-100% - var(--film-card-vertical-offset)))
+}
+
+.film-item:hover .film-item__favorite,
+.film-item:focus-within .film-item__favorite{
+	transform: translateY(0)
+}
+
+.favorite-icon {
+	width: 25px;
+	height: 25px;
+}
+.favorite-icon path {
+	fill: transparent;
+	stroke:#fff;
+	stroke-width: 2px;
+	transition: stroke var(--transition-duration) ease-in, fill var(--transition-duration) ease-in
+}
+
+.favorite-icon--active path {
+	stroke: #efce4a;
+	fill: #efce4a
 }

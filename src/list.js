@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { IMAGE_PATH } from "./constants";
-import { Link } from "react-router-dom";
+import FilmItem from "./film-item";
 
 const List = ({ data }) => {
   const initialFavotites = JSON.parse(localStorage.getItem("favorites")) || {};
@@ -24,27 +23,17 @@ const List = ({ data }) => {
     data && (
       <ul className="films-list">
         {data.map(({ title, id, poster_path }) => {
+          const isFavorite = Object.keys(favorites).includes(String(id))
           return (
             <li key={id} className="films-list__item">
-              <img
-                src={`${IMAGE_PATH}/${poster_path}`}
-                alt={`Poster for ${title}`}
+              <FilmItem
+                title={title}
+                id={id}
+                posterPath={poster_path}
+                addToFavorite={addToFavorite}
+                removeFromFavorite={removeFromFavorite}
+                isFavorite={isFavorite}
               />
-              <h3>
-                <Link to={`/film/${id}`}>{title}</Link>
-              </h3>
-              {!Object.keys(favorites).includes(String(id)) ? (
-                <button
-                  type="button"
-                  onClick={addToFavorite({ [id]: { title } })}
-                >
-                  Add to favorites
-                </button>
-              ) : (
-                <button type="button" onClick={removeFromFavorite(id)}>
-                  Remove from favorites
-                </button>
-              )}
             </li>
           );
         })}
