@@ -1,5 +1,5 @@
 import React from "react";
-import classNames from 'classnames'
+import classNames from "classnames";
 import { range } from "../utilities";
 
 const useData = ({ currentPage, totalPages, maxPages = 7 }) => {
@@ -41,9 +41,14 @@ const Pagination = ({ currentPage, totalPages, maxPages, onChangePage }) => {
       <ul className="pagination">
         {pages.map(page => {
           return (
-            <li className={classNames({current: page === currentPage})}>
+            <li
+              className={classNames("pagination__item", {
+                "pagination__item--current": page === currentPage
+              })}
+            >
               <a
                 href={`#page${page}`}
+                className="pagination__link"
                 onClick={e => {
                   e.preventDefault();
                   onChangePage(page);

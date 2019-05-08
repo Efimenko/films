@@ -3,6 +3,12 @@
 	--film-card-vertical-offset: 12px;
 	--film-card-horizontal-offset: 8px;
 	--transition-duration: 0.2s;
+	--brand-color: #ffe6ab;
+	--border-radius: 3px;
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
 }
 
 .current a {
@@ -30,7 +36,7 @@
 	padding-top: 150%;
 	overflow: hidden;
 	box-shadow: 1px 1px 6px 0 rgba(0,0,0,.4);
-  border-radius: 3px;
+  border-radius: var(--border-radius);
 }
 
 .film-item__image-wrapper {
@@ -136,5 +142,32 @@
 }
 
 .pagination {
-	
+	display: flex;
+	padding-left: 0;
+	list-style: none;
+	justify-content: center;
+}
+
+.pagination__item {
+	color: #000;
+	border: 2px solid var(--brand-color);
+	border-radius: var(--border-radius);
+	margin-left: 6px;
+	margin: 8px;
+	font-size: 18px;
+}
+
+.pagination__link {
+	display: inline-block;
+	min-width: 45px;
+	text-align: center;
+	color: inherit;
+	text-decoration: none;
+	padding: 12px;
+	transition: background-color var(--transition-duration) ease-in;
+}
+
+.pagination__link:hover,
+.pagination__link:focus {
+	background-color: var(--brand-color);
 }
