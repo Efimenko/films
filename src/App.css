@@ -23,16 +23,18 @@ button {
 .films-list {
 	padding-left: 0;
 	list-style: none;
-	padding-left: var(--gutter);
-	padding-right: var(--gutter);
 	display: flex;
 	flex-wrap: wrap;
+	margin-top: 0;
+	margin-bottom: 20px;
 }
 
 .films-list__item {
 	flex: 1;
 	min-width: 240px;
-	padding: var(--gutter);
+	padding-left: var(--gutter);
+	padding-right: var(--gutter);
+	margin-bottom: calc(var(--gutter) * 2);
 }
 
 .film-item {
@@ -118,7 +120,6 @@ button {
 	background: none;
 	border: 0;
 	align-self: flex-start;
-	will-change: transform;
 	transition: transform var(--transition-duration) ease-in;
 	transform: translateY(calc(-100% - var(--film-card-vertical-offset)))
 }
@@ -160,6 +161,11 @@ button {
 	font-size: 18px;
 }
 
+.pagination__item--current .pagination__link {
+	pointer-events: none;
+	background-color: var(--brand-color);
+}
+
 .pagination__link {
 	display: inline-block;
 	min-width: 45px;
@@ -176,10 +182,15 @@ button {
 }
 
 .header {
+	position: sticky;
+	top: 0;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: var(--gutter);
+	background-color: #fff;
+	z-index: 2;
+	border-bottom: 2px solid #efefef;
 }
 
 .nav-list {
@@ -266,4 +277,37 @@ button {
 .search-form__button:hover,
 .search-form__button:focus {
 	background-color: var(--brand-color);
+}
+
+.row {
+	margin-left: calc(-1 * var(--gutter));
+	margin-right: calc(-1 * var(--gutter));
+}
+
+.container {
+	padding-left: var(--gutter);
+	padding-right: var(--gutter);
+}
+
+.page-title {
+	font-size: 28px;
+	position: relative;
+	display: inline-block;
+	margin-bottom: 20px;
+	margin-top: 0;
+}
+
+.page-title::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 15px;
+	background-color: var(--brand-color);
+	z-index: -1;
+	bottom: 0px;
+}
+
+.page-content {
+	padding-top: 30px;
 }

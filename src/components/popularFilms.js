@@ -26,7 +26,12 @@ const PopularFilms = ({ location, history }) => {
   return (
     Boolean(Object.keys(data).length) && (
       <React.Fragment>
-        <List data={data.results} />
+        <section className="page-content">
+          <div className="container">
+            <h2 className="page-title">Popular films</h2>
+          </div>
+          <List data={data.results} />
+        </section>
         {data.total_pages && (
           <Pagination
             currentPage={page}

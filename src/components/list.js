@@ -17,9 +17,10 @@ const List = ({ data }) => {
 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
+    window.dispatchEvent( new Event('storage') )
   }, [favorites]);
 
-  return (data && data.length) ? (
+  return data && data.length ? (
     <ul className="films-list">
       {data.map(({ title, id, poster_path }) => {
         const isFavorite = Object.keys(favorites).includes(String(id));

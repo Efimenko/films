@@ -16,6 +16,9 @@ const FilmsByGenre = ({ match }) => {
 
   return (
     <React.Fragment>
+      <div className="container">
+        <h2 className="page-title">Films by genre</h2>
+      </div>
       <List data={results} />
       {/* {data.total_pages && (
           <Pagination

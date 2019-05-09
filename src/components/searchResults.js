@@ -27,7 +27,12 @@ const SearchResults = ({ location, history }) => {
   return (
     data && (
       <React.Fragment>
-        <List data={data.results} />
+        <section className="page-content">
+          <div className="container">
+            <h2 className="page-title">Search results</h2>
+          </div>
+          <List data={data.results} />
+        </section>
         {data.total_pages && (
           <Pagination
             currentPage={page}
