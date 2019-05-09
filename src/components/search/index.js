@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './style.css'
 
 const Search = ({ history }) => {
   const [value, setValue] = useState("");
@@ -16,6 +17,7 @@ const Search = ({ history }) => {
         placeholder="Type something..."
         value={value}
         onChange={e => setValue(e.target.value)}
+        required
       />
       <button className="search-form__button" type="submit">
         Search

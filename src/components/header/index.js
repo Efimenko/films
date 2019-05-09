@@ -1,7 +1,8 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import classNames from 'classnames'
-import Search from "./search";
+import Search from "../search/index";
+import './style.css'
 
 const PAGES = {
   popular: {

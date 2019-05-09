@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import List from "./list";
+import List from "../components/list/index";
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState(null);
@@ -20,8 +20,8 @@ const Favorites = () => {
   })
 
   const formatedFavorites = favorites ? Object.keys(favorites).reduce((acc, id) => {
-    const { poster_path, title } = favorites[id];
-    return [...acc, { id, poster_path, title }];
+    const { poster_path, title, vote_average } = favorites[id];
+    return [...acc, { id, poster_path, title, vote_average }];
   }, []) : []
 
   if(!favorites) return null

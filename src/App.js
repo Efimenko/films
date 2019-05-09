@@ -1,11 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import PopularFilms from "./components/popularFilms";
-import SearchResults from "./components/searchResults";
-import Header from "./components/header";
-import SinglePage from "./components/single-page";
-import Favorites from './components/favorites'
-import FilmsByGenre from './components/films-by-genre'
+import Header from "./components/header/index";
+import {Favorites, FilmsByGenre, PopularFilms, SearchResults,SinglePage} from './pages/index'
 import "./App.css";
 
 const App = () => {

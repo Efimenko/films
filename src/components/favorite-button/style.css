@@ -1,0 +1,21 @@
+.favorite-button {
+	padding: 5px;
+	background: none;
+	border: 0;
+}
+
+.favorite-icon {
+	width: 25px;
+	height: 25px;
+}
+.favorite-icon path {
+	fill: transparent;
+	stroke:#fff;
+	stroke-width: 2px;
+	transition: stroke var(--transition-duration) ease-in, fill var(--transition-duration) ease-in
+}
+
+.favorite-icon--active path {
+	stroke: #efce4a;
+	fill: #efce4a
+}

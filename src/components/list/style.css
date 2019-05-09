@@ -1,0 +1,16 @@
+.films-list {
+	padding-left: 0;
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+.films-list__item {
+	flex: 1;
+	min-width: 240px;
+	padding-left: var(--gutter);
+	padding-right: var(--gutter);
+	margin-bottom: calc(var(--gutter) * 2);
+}

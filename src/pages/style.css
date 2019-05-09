@@ -1,0 +1,22 @@
+.page-title {
+	font-size: 28px;
+	position: relative;
+	display: inline-block;
+	margin-bottom: 20px;
+	margin-top: 0;
+}
+
+.page-title::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 15px;
+	background-color: var(--brand-color);
+	z-index: -1;
+	bottom: 0px;
+}
+
+.page-content {
+	padding-top: 30px;
+}

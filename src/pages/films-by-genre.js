@@ -1,7 +1,7 @@
 import React from "react";
-import Pagination from "./pagination";
+import Pagination from "../components/pagination/index";
 import { API_LINK, API_KEY } from "../constants";
-import List from "./list";
+import List from "../components/list/index";
 import useFetch from "../hooks/useFetch";
 
 const FilmsByGenre = ({ match }) => {

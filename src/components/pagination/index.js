@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
-import { range } from "../utilities";
+import { range } from "../../utilities";
+import './style.css'
 
 const useData = ({ currentPage, totalPages, maxPages = 7 }) => {
   // depends on maxPages currentPage totalPages
