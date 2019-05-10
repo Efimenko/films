@@ -1,16 +1,53 @@
 .films-list {
-	padding-left: 0;
-	list-style: none;
-	display: flex;
-	flex-wrap: wrap;
-	margin-top: 0;
-	margin-bottom: 20px;
+  --count-item-perline: 1;
+  --count-on-large-mobile: 2;
+  --count-on-tablet: 4;
+  --count-on-desctop: 6;
+
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 480px) {
+  .films-list {
+    --count-item-perline: 2;
+  }
+}
+
+@media (min-width: 768px) {
+  .films-list {
+    --count-item-perline: 3;
+  }
+}
+
+@media (min-width: 992px) {
+  .films-list {
+    --count-item-perline: 4;
+  }
+}
+
+@media (min-width: 1200px) {
+  .films-list {
+    --count-item-perline: 5;
+  }
 }
 
 .films-list__item {
-	flex: 1;
-	min-width: 240px;
-	padding-left: var(--gutter);
-	padding-right: var(--gutter);
-	margin-bottom: calc(var(--gutter) * 2);
+  width: calc(100vw / var(--count-item-perline));
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+  margin-bottom: calc(var(--gutter) * 2);
+}
+
+@media (min-width: 1500px) {
+  .films-list__item {
+    flex: 1;
+    width: auto;
+    min-width: 250px;
+    max-width: 300px;
+  }
 }
