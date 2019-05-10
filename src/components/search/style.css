@@ -1,6 +1,12 @@
+.search-wrapper {
+	--button-width: 100px;
+	flex: 1;
+	max-width: 500px;
+	position: relative;
+}
+
 .search-form {
 	display: flex;
-	flex: 1;
 }
 
 .search-form__input {
@@ -23,6 +29,8 @@
 }
 
 .search-form__button {
+	width: var(--button-width);
+	flex: 0;
 	margin-left: 8px;
 	font-size: 18px;
 	padding: 10px 15px;
@@ -34,4 +42,65 @@
 .search-form__button:hover,
 .search-form__button:focus {
 	background-color: var(--brand-color);
+}
+
+.live-results {
+	position: absolute;
+	top: calc(100% + 4px);
+	border-radius: var(--border-radius);
+	left: 0;
+	width: calc(100% - var(--button-width));
+	border: 2px solid #efefef;
+	background-color: #fff;
+	margin: 0;
+	padding-left: 0;
+	list-style: none;
+}
+
+.live-results--empty {
+	padding: 10px;
+}
+
+.live-results__item {
+	position: relative;
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	transition: background-color var(--transition-duration) ease-in;
+	font-size: 18px;
+}
+
+.live-results__item:hover,
+.live-results__item:focus-within {
+	background-color: #efefef;
+}
+
+.live-results__image {
+	max-width: 40px;
+	border-radius: var(--border-radius);
+	margin-right: 8px;
+}
+
+.live-results__link {
+	text-decoration: none;
+	color: inherit;
+}
+
+.live-results__link::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.live-results__year {
+	color: #ccc;
+	font-size: 12px;
+}
+
+.live-results__rating {
+	display: inline-block;
+	margin-top: 4px;
 }

@@ -89,7 +89,7 @@
 	transform: translateY(0)
 }
 
-.film-item__rating {
+.rating {
 	background-color: #efce4a;
 	color: #000;
 	border-radius: var(--border-radius);

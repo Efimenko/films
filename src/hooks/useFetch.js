@@ -4,7 +4,9 @@ const useFetch = (link) => {
   const [data, setData] = useState({})
   useEffect(() => {
     let canceled
-    fetch(link)
+
+    if (link) {
+      fetch(link)
       .then(response => {
         if (response.status !== 200) {
           throw new Error({code: response.status, text: response.statusText})
@@ -19,7 +21,8 @@ const useFetch = (link) => {
       })
       .catch(err => {
         setData({error: true, ...err})
-      });
+      })
+    }
 
     return () => {
       canceled = true

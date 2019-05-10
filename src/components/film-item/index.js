@@ -35,7 +35,7 @@ const FilmItem = ({
           id={id}
           film={{title, vote_average: rating, poster_path: posterPath}}
         />
-        {rating && <span className="film-item__rating">{rating}</span>}
+        {rating && <span className="rating">{rating}</span>}
       </div>
     </div>
   </article>
