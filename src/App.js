@@ -6,7 +6,7 @@ import "./App.css";
 
 const App = () => {
   return (
-    <Router>
+    <Router basename={process.env.NODE_ENV === 'development' ? '/' : 'films'}>
       <div className="App">
         <Header />
         <Route exact path="/" component={PopularFilms} />
