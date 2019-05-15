@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 
 const useFetch = (link) => {
   const [data, setData] = useState({})
+  const [stateLink, setStateLink] = useState(link)
   useEffect(() => {
     let canceled
 
-    if (link) {
-      fetch(link)
+    if (stateLink) {
+      fetch(stateLink)
       .then(response => {
         if (response.status !== 200) {
           throw new Error({code: response.status, text: response.statusText})
@@ -27,8 +28,13 @@ const useFetch = (link) => {
     return () => {
       canceled = true
     }
-  }, [link]);
-  return data;
+  }, [stateLink]);
+
+  const doFetch = (link) => {
+    setStateLink(link)
+  }
+
+  return {data, doFetch};
 };
 
 export default useFetch;
