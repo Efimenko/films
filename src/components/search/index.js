@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { API_KEY, API_LINK, IMAGE_PATH_SMALL } from "../../constants";
+import Poster from '../poster/index'
 import "./style.css";
 
 const Search = ({ history }) => {
@@ -62,19 +63,17 @@ const Search = ({ history }) => {
             .map(({ id, title, poster_path, release_date, vote_average }) => {
               return (
                 <li className="live-results__item">
-                  <img
-                    className="live-results__image"
-                    src={`${IMAGE_PATH_SMALL}/${poster_path}`}
-                    alt={`Poster for ${title}`}
-                  />
+                  <div className="live-results__image">
+                    <Poster title={title} posterPath={poster_path}/>
+                  </div>
                   <div className="live-results__meta">
                     <Link to={`/film/${id}`} className="live-results__link" onClick={() => setValue("")}>
                       {title}
                     </Link>
                     &nbsp;
-                    <span class="live-results__year">
+                    {release_date && (<span class="live-results__year">
                       ({release_date.slice(0, 4)})
-                    </span>
+                    </span>)}
                     <br />
                     <div className="rating live-results__rating">
                       {vote_average}
