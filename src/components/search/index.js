@@ -37,7 +37,7 @@ const Search = ({ history }) => {
     setValue("")
   };
 
-  const haveResults = value && results;
+  const haveResults = value && Boolean(results.length);
 
   return (
     <div className="search-wrapper" ref={searchElement}>
@@ -57,7 +57,7 @@ const Search = ({ history }) => {
           Search
         </button>
       </form>
-      {haveResults && visibilityLiveResults && Boolean(results.length) && (
+      {haveResults && visibilityLiveResults && (
         <ul className="live-results" data-testid="live-results">
           {results
             .slice(0, 5)

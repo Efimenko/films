@@ -28,7 +28,7 @@ const useFetch = (link) => {
     return () => {
       canceled = true
     }
-  });
+  }, [link]);
 
   return data;
 };
