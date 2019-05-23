@@ -1,22 +1,23 @@
 import React, { useState } from "react";
-import { IMAGE_PATH } from "../../constants";
+import { IMAGE_PATH, IMAGE_PATH_SMALL } from "../../constants";
 import './style.css'
 
-const Poster = ({ posterPath, title }) => {
+const Poster = ({ posterPath, title, small }) => {
   const [imageError, setImageError] = useState(false);
 
   return (
     <React.Fragment>
       {!imageError && (
         <img
-          src={`${IMAGE_PATH}/${posterPath}`}
+          data-testid="poster-image"
+          src={`${small ? IMAGE_PATH_SMALL: IMAGE_PATH}/${posterPath}`}
           className="image"
           alt={`Poster for ${title}`}
           onError={() => setImageError(true)}
         />
       )}
       {imageError && (
-        <div className="image-placeholder">
+        <div className="image-placeholder" data-testid="poster-placeholder">
           <svg
             className="image-placeholder__icon"
             xmlns="http://www.w3.org/2000/svg"

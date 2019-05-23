@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
-import { API_KEY, API_LINK, IMAGE_PATH_SMALL } from "../../constants";
+import { API_KEY, API_LINK } from "../../constants";
 import Poster from '../poster/index'
 import "./style.css";
 
@@ -41,8 +41,9 @@ const Search = ({ history }) => {
 
   return (
     <div className="search-wrapper" ref={searchElement}>
-      <form className="search-form" onSubmit={submitForm}>
+      <form className="search-form" onSubmit={submitForm} data-testid="search-form">
         <input
+          data-testid="search-input"
           className="search-form__input"
           placeholder="Type something..."
           value={value}
@@ -52,19 +53,19 @@ const Search = ({ history }) => {
           onFocus={() => setVisibilityLiveResults(true)}
           required
         />
-        <button className="search-form__button" type="submit">
+        <button className="search-form__button" type="submit" data-testid="submit-button">
           Search
         </button>
       </form>
       {haveResults && visibilityLiveResults && Boolean(results.length) && (
-        <ul className="live-results">
+        <ul className="live-results" data-testid="live-results">
           {results
             .slice(0, 5)
             .map(({ id, title, poster_path, release_date, vote_average }) => {
               return (
                 <li className="live-results__item">
                   <div className="live-results__image">
-                    <Poster title={title} posterPath={poster_path}/>
+                    <Poster title={title} posterPath={poster_path} small/>
                   </div>
                   <div className="live-results__meta">
                     <Link to={`/film/${id}`} className="live-results__link" onClick={() => setValue("")}>
