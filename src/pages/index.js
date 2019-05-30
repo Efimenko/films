@@ -1,6 +1,6 @@
 import './style.css'
 export {default as Favorites} from './favorites' 
 export {default as FilmsByGenre} from './films-by-genre' 
-export {default as PopularFilms} from './popularFilms'
-export {default as SearchResults} from './searchResults'
+export {default as PopularFilms} from './popular-films'
+export {default as SearchResults} from './search-results'
 export {default as SinglePage} from './single-page'
