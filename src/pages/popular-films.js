@@ -1,7 +1,7 @@
 import React from "react";
 import Pagination from "../components/pagination/index";
 import { API_LINK, API_KEY } from "../constants";
-import useFetch from "../hooks/useFetch";
+import useFetch from "../hooks/use-fetch";
 import List from "../components/list/index";
 import { parseQuery, generateQuery } from "../utilities";
 

@@ -1,4 +1,4 @@
-import useFetch from './useFetch'
+import useFetch from './use-fetch'
 import {renderHook} from 'react-hooks-testing-library'
 import {act} from 'react-test-renderer'
 

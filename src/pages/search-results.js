@@ -3,7 +3,7 @@ import Pagination from "../components/pagination/index";
 import { parseQuery, generateQuery } from "../utilities";
 import { API_LINK, API_KEY } from "../constants";
 import List from '../components/list/index'
-import useFetch from "../hooks/useFetch";
+import useFetch from "../hooks/use-fetch";
 
 const SearchResults = ({ location, history }) => {
   const currentSearch = parseQuery(location.search);

@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
+import useFetch from "../hooks/use-fetch";
 import List from "../components/list/index";
 import FavoriteButton from "../components/favorite-button/index";
 import { API_KEY, API_LINK, IMAGE_PATH } from "../constants";
-import useFavorites from "../hooks/useFavorites";
+import useFavorites from "../hooks/use-favorites";
 
 const SinglePage = ({ match }) => {
   const {

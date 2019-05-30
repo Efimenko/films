@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
+import useFetch from "../../hooks/use-fetch";
+import useFocusWithin from '../../hooks/use-focus-within'
 import { API_KEY, API_LINK } from "../../constants";
 import Poster from "../poster/index";
 import "./style.css";
@@ -15,22 +16,6 @@ const Search = ({ history }) => {
     : "";
   const { results } = useFetch(urlForSearch);
 
-  useEffect(() => {
-    const outsideActionHandler = e => {
-      if (searchElement && !searchElement.current.contains(e.target)) {
-        setVisibilityLiveResults(false);
-      }
-    };
-
-    document.addEventListener("mousedown", outsideActionHandler);
-    document.addEventListener("focusin", outsideActionHandler);
-
-    return () => {
-      document.removeEventListener("mousedown", outsideActionHandler);
-      document.removeEventListener("focusin", outsideActionHandler);
-    };
-  });
-
   const submitForm = event => {
     event.preventDefault();
     history.push(`/search/?query=${value}&page=1`);
@@ -38,6 +23,8 @@ const Search = ({ history }) => {
   };
 
   const haveResults = value && results && Boolean(results.length);
+
+  useFocusWithin(searchElement, setVisibilityLiveResults);
 
   return (
     <div className="search-wrapper" ref={searchElement}>
@@ -54,7 +41,6 @@ const Search = ({ history }) => {
           onChange={e => {
             setValue(e.target.value);
           }}
-          onFocus={() => setVisibilityLiveResults(true)}
           required
         />
         <button
@@ -100,7 +86,9 @@ const Search = ({ history }) => {
         </ul>
       )}
       {visibilityLiveResults && results && !results.length && (
-        <div className="live-results live-results--empty">Nothing was found</div>
+        <div className="live-results live-results--empty">
+          Nothing was found
+        </div>
       )}
     </div>
   );

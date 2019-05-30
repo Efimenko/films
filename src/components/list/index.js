@@ -1,6 +1,6 @@
 import React from "react";
 import FilmItem from "../film-item/index";
-import useFavorites from '../../hooks/useFavorites'
+import useFavorites from '../../hooks/use-favorites'
 import './style.css'
 
 const List = ({ data }) => {

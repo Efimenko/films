@@ -31,3 +31,16 @@ export const generateQuery = data => {
       }, "")
     : "";
 };
+
+export const debounce = (delay, callback) => {
+  let timerId = null;
+  return (...args) => {
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+    timerId = setTimeout(() => {
+      callback(...args);
+      timerId = null;
+    }, delay);
+  };
+};
