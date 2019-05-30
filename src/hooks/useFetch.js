@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 const useFetch = (link) => {
   const [data, setData] = useState({})
-
   useEffect(() => {
     let canceled
 

@@ -1,1 +1,0 @@
-export default jest.fn(() => [{id: 1}, {id: 2}]);
