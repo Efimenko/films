@@ -63,7 +63,7 @@ describe("<Search /> component", () => {
       expect(liveResults).toBe(null);
     });
 
-    it("should render live results when something typed", async () => {
+    it("should render live results when something typed", () => {
       const { queryByTestId } = render(
         <Router>
           <Search />
@@ -76,12 +76,12 @@ describe("<Search /> component", () => {
       fireEvent.change(searchInput, { target: { value: "success request" } });
       
       
-      const liveResults = await waitForElement(() => queryByTestId("live-results"));
+      const liveResults = () => queryByTestId("live-results");
 
       expect(liveResults).not.toBe(null);
     });
 
-    it("should render live results with not found text on empty results", async () => {
+    it("should render live results with not found text on empty results", () => {
       const { queryByTestId, queryByText } = render(
         <Router>
           <Search />
@@ -90,12 +90,12 @@ describe("<Search /> component", () => {
       const searchInput = queryByTestId("search-input");
       fireEvent.change(searchInput, { target: { value: "bad request" } });
       fireEvent.focusIn(searchInput);
-      const nothingFoundPanel = await waitForElement(() => queryByText("Nothing was found"))
+      const nothingFoundPanel = queryByText("Nothing was found")
 
       expect(nothingFoundPanel).not.toBe(null);
     });
 
-    it("should hide live results when unfocus input", async () => {
+    it("should hide live results when unfocus input", () => {
       const { queryByTestId } = render(
         <Router>
           <Search />
@@ -104,14 +104,14 @@ describe("<Search /> component", () => {
       const searchInput = queryByTestId("search-input");
       fireEvent.change(searchInput, { target: { value: "success request" } });
       fireEvent.focusIn(searchInput);
-      const liveResults = await waitForElement(() => queryByTestId("live-results"))
+      const liveResults = queryByTestId("live-results")
       expect(liveResults).not.toBe(null);
       fireEvent.focusOut(searchInput);
-      const isLiveResultsRemoved = await waitForElementToBeRemoved(() => queryByTestId("live-results"));
+      const isLiveResultsRemoved = queryByTestId("live-results");
       expect(isLiveResultsRemoved).toBe(true);
     })
 
-    it("should clear search field when click on some link in result", async () => {
+    it("should clear search field when click on some link in result", () => {
       const { queryByTestId, getByText } = render(
         <Router>
           <Search />
@@ -120,13 +120,13 @@ describe("<Search /> component", () => {
       const searchInput = queryByTestId("search-input");
       fireEvent.change(searchInput, { target: { value: "success request" } });
       fireEvent.focusIn(searchInput);
-      const liveResultsLink = await waitForElement(() => getByText('Film 1'))
+      const liveResultsLink = getByText('Film 1')
 
       fireEvent.click(liveResultsLink)
       expect(searchInput.value).toBe("")
     })
 
-    it("should show release date when it present and hide when absent", async () => {
+    it("should show release date when it present and hide when absent", () => {
       const { container, queryByTestId } = render(
         <Router>
           <Search />
@@ -136,14 +136,14 @@ describe("<Search /> component", () => {
       fireEvent.change(searchInput, { target: { value: "success request" } });
       fireEvent.focusIn(searchInput);
 
-      await wait(() => {
-        const liveResultsItems = container.querySelectorAll('.live-results__item')
-        const itemWithoutDate = liveResultsItems[0].querySelector('.live-results__year')
-        const itemWithDate = liveResultsItems[1].querySelector('.live-results__year')
 
-        expect(itemWithoutDate).toBe(null)
-        expect(itemWithDate).not.toBe(null)
-      })      
+      const liveResultsItems = container.querySelectorAll('.live-results__item')
+      const itemWithoutDate = liveResultsItems[0].querySelector('.live-results__year')
+      const itemWithDate = liveResultsItems[1].querySelector('.live-results__year')
+
+      expect(itemWithoutDate).toBe(null)
+      expect(itemWithDate).not.toBe(null)
+   
     })
   });
 });

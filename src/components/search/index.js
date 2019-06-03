@@ -1,15 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useFetch from "../../hooks/use-fetch";
-import useFocusWithin from '../../hooks/use-focus-within'
+import useFocusWithin from "../../hooks/use-focus-within";
 import { API_KEY, API_LINK } from "../../constants";
 import Poster from "../poster/index";
 import "./style.css";
 
 const Search = ({ history }) => {
   const [value, setValue] = useState("");
-  const [visibilityLiveResults, setVisibilityLiveResults] = useState(false);
-  const searchElement = useRef(null);
+  const {focused, ...handlers} = useFocusWithin();
 
   const urlForSearch = value
     ? `${API_LINK}/search/movie?api_key=${API_KEY}&page=1&query=${value}`
@@ -24,10 +23,11 @@ const Search = ({ history }) => {
 
   const haveResults = value && results && Boolean(results.length);
 
-  useFocusWithin(searchElement, setVisibilityLiveResults);
-
   return (
-    <div className="search-wrapper" ref={searchElement}>
+    <div
+      className="search-wrapper"
+      {...handlers}
+    >
       <form
         className="search-form"
         onSubmit={submitForm}
@@ -51,7 +51,7 @@ const Search = ({ history }) => {
           Search
         </button>
       </form>
-      {haveResults && visibilityLiveResults && (
+      {haveResults && focused && (
         <ul className="live-results" data-testid="live-results">
           {results
             .slice(0, 5)
@@ -85,7 +85,7 @@ const Search = ({ history }) => {
             })}
         </ul>
       )}
-      {visibilityLiveResults && results && !results.length && (
+      {focused && results && !results.length && (
         <div className="live-results live-results--empty">
           Nothing was found
         </div>
