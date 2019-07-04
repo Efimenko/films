@@ -21,7 +21,7 @@ const Header = ({ history }) => {
     <header className="header">
       <Search history={history} />
       <nav className="nav">
-        <ul className="nav-list">
+        <ul className="nav-list" data-testid="nav-list">
           {Object.keys(PAGES).map(page => {
             return (
               <li
