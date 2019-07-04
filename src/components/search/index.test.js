@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { render, fireEvent, cleanup, waitForElement, waitForElementToBeRemoved, wait } from "react-testing-library";
+import { render, fireEvent, cleanup, wait } from "react-testing-library";
 import Search from "./index";
 
 jest.mock("../../hooks/use-fetch.js", () =>
@@ -81,7 +81,7 @@ describe("<Search /> component", () => {
       expect(liveResults).not.toBe(null);
     });
 
-    it("should render live results with not found text on empty results", () => {
+    it("should render live results with not found text on empty results", async () => {
       const { queryByTestId, queryByText } = render(
         <Router>
           <Search />
@@ -89,13 +89,11 @@ describe("<Search /> component", () => {
       );
       const searchInput = queryByTestId("search-input");
       fireEvent.change(searchInput, { target: { value: "bad request" } });
-      fireEvent.focusIn(searchInput);
-      const nothingFoundPanel = queryByText("Nothing was found")
-
-      expect(nothingFoundPanel).not.toBe(null);
+      fireEvent.focus(searchInput);
+      await wait(() => expect(queryByText("Nothing was found")).not.toBeNull());
     });
 
-    it("should hide live results when unfocus input", () => {
+    it("should hide live results when unfocus input", async () => {
       const { queryByTestId } = render(
         <Router>
           <Search />
@@ -103,15 +101,13 @@ describe("<Search /> component", () => {
       );
       const searchInput = queryByTestId("search-input");
       fireEvent.change(searchInput, { target: { value: "success request" } });
-      fireEvent.focusIn(searchInput);
-      const liveResults = queryByTestId("live-results")
-      expect(liveResults).not.toBe(null);
-      fireEvent.focusOut(searchInput);
-      const isLiveResultsRemoved = queryByTestId("live-results");
-      expect(isLiveResultsRemoved).toBe(true);
+      fireEvent.focus(searchInput);
+      await wait(() => expect(queryByTestId("live-results")).not.toBeNull())
+      fireEvent.blur(searchInput);
+      await wait(() => expect(queryByTestId("live-results")).toBeNull())
     })
 
-    it("should clear search field when click on some link in result", () => {
+    it("should clear search field when click on some link in result", async () => {
       const { queryByTestId, getByText } = render(
         <Router>
           <Search />
@@ -119,31 +115,30 @@ describe("<Search /> component", () => {
       );
       const searchInput = queryByTestId("search-input");
       fireEvent.change(searchInput, { target: { value: "success request" } });
-      fireEvent.focusIn(searchInput);
-      const liveResultsLink = getByText('Film 1')
+      fireEvent.focus(searchInput);
+      let liveResultsLink
+      await wait (() => liveResultsLink = getByText('Film 1'))
 
       fireEvent.click(liveResultsLink)
       expect(searchInput.value).toBe("")
     })
 
-    it("should show release date when it present and hide when absent", () => {
-      const { container, queryByTestId } = render(
+    it("should show release date when it present and hide when absent", async () => {
+      const { container, queryByTestId, debug} = render(
         <Router>
           <Search />
         </Router>
       );
       const searchInput = queryByTestId("search-input");
       fireEvent.change(searchInput, { target: { value: "success request" } });
-      fireEvent.focusIn(searchInput);
-
-
-      const liveResultsItems = container.querySelectorAll('.live-results__item')
+      fireEvent.focus(searchInput);
+      let liveResultsItems
+      await wait(() => liveResultsItems = container.querySelectorAll('.live-results__item'))
       const itemWithoutDate = liveResultsItems[0].querySelector('.live-results__year')
       const itemWithDate = liveResultsItems[1].querySelector('.live-results__year')
 
       expect(itemWithoutDate).toBe(null)
       expect(itemWithDate).not.toBe(null)
-   
     })
   });
 });
