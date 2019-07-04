@@ -16,7 +16,7 @@ jest.mock("../../hooks/use-fetch.js", () =>
 afterEach(cleanup);
 
 describe("<Search /> component", () => {
-  describe("change functional", () => {
+  describe("change functionality", () => {
     it("should change value", () => {
       const { queryByTestId } = render(<Search />);
       const searchInput = queryByTestId("search-input");
@@ -25,7 +25,7 @@ describe("<Search /> component", () => {
     });
   });
 
-  describe("submit functional", () => {
+  describe("submit functionality", () => {
     it("should submit form on click submit button", () => {
       const history = {
         push: jest.fn()
