@@ -1,7 +1,6 @@
 import React from "react";
-
 import FavoriteButton from "../favorite-button/index";
-import Poster from "../poster/index"
+import Poster from "../poster/index";
 import { Link } from "react-router-dom";
 import "./style.css";
 
@@ -14,7 +13,6 @@ const FilmItem = ({
   removeFromFavorite,
   isFavorite
 }) => {
-
   return (
     <article className="film-item">
       <div className="film-item__image-wrapper">
