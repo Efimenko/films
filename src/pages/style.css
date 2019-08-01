@@ -1,22 +1,134 @@
 .page-title {
-	font-size: 28px;
-	position: relative;
-	display: inline-block;
-	margin-bottom: 20px;
-	margin-top: 0;
+  font-size: 28px;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+  margin-top: 0;
 }
 
 .page-title::before {
-	content: "";
-	position: absolute;
-	left: 0;
-	right: 0;
-	height: 15px;
-	background-color: var(--brand-color);
-	z-index: -1;
-	bottom: 0px;
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 15px;
+  background-color: var(--brand-color);
+  z-index: -1;
+  bottom: 0;
 }
 
 .page-content {
-	padding-top: 30px;
+  padding-top: 30px;
+}
+
+.film-page {
+  --poster-width: 230px;
+  --poster-part: calc(var(--poster-width) + var(--gutter) * 2);
+}
+
+.film-page__cover {
+  position: relative;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 35vh;
+  display: flex;
+  align-items: flex-end;
+  padding-top: var(--gutter);
+  padding-bottom: var(--gutter);
+}
+
+.film-page__cover::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.6;
+}
+
+.film-page__body {
+  
+}
+
+.film-page__header {
+  display: flex;
+  position: relative;
+  z-index: 1;
+}
+
+.film-page__header-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--poster-width);
+}
+
+.film-page__header-right {
+  padding-left: var(--poster-part);
+  flex: 1;
+}
+
+.film-page__title {
+  color: #fff;
+  margin-right: 10px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 32px;
+}
+
+.film-page__title-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.film-page__poster {
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.4);
+}
+
+.film-page__meta {
+  font-size: 12px;
+  margin-top: 10px;
+  color: #fff;
+}
+
+.film-page__meta-row {
+  margin-bottom: 8px;
+}
+
+.film-page__description {
+  padding-left: var(--poster-part);
+}
+
+.meta-list {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.meta-list__item {
+  margin-right: 8px;
+}
+
+.meta-list__item a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.meta-list__item a:hover,
+.meta-list__item a:focus {
+  color: var(--brand-color);
+}
+
+.list-item-icon {
+  display: flex;
+  align-items: center;
+}
+
+.list-item-icon .icon {
+  margin-right: 4px;
 }

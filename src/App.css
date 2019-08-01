@@ -1,31 +1,45 @@
 :root {
-	--gutter: 16px;
-	--film-card-vertical-offset: 12px;
-	--film-card-horizontal-offset: 8px;
-	--transition-duration: 0.2s;
-	--brand-color: #ffe6ab;
-	--border-radius: 3px;
+  --gutter: 16px;
+  --film-card-vertical-offset: 12px;
+  --film-card-horizontal-offset: 8px;
+  --transition-duration: 0.2s;
+  --brand-color: #ffe6ab;
+  --border-radius: 3px;
 }
 
-*, *::before, *::after {
-	box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 button {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .current a {
-	color: #000;
-	text-decoration: none;
+  color: #000;
+  text-decoration: none;
 }
 
 .row {
-	margin-left: calc(-1 * var(--gutter));
-	margin-right: calc(-1 * var(--gutter));
+  margin-left: calc(-1 * var(--gutter));
+  margin-right: calc(-1 * var(--gutter));
 }
 
 .container {
-	padding-left: var(--gutter);
-	padding-right: var(--gutter);
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.container--fluid {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.icon {
+  width: 1.2em;
+  height: 1.2em;
+  fill: currentColor;
 }
